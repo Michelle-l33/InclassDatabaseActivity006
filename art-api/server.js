@@ -11,13 +11,21 @@ app.use(cors());
 mongoose.connect('mongodb://localhost:27017/artDB', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
-}).then(() => console.log('Connected to MongoDB'))
-  .catch((err) => console.error('Error connecting to MongoDB:', err));
+})
+.then(() => {
+  console.log('Connected to MongoDB');
+  return seedData(); // Run seeding before starting the server
+})
+.catch((err) => {
+  console.error('Error connecting to MongoDB or seeding:', err);
+});
+
 
 // Get all paintings
 app.get('/api/paintings', async (req, res) => {
   try {
     const paintings = await Painting.find();
+    console.log("Getting all paintings",paintings);
     res.json(paintings);
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -51,7 +59,7 @@ app.put('/api/paintings/:id', async (req, res) => {
 });
 
 // Start the server
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });
