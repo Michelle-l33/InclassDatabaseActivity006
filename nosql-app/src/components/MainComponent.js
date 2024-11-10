@@ -13,8 +13,11 @@ const MainComponent = () => {
     const fetchPaintings = async () => {
       try {
         // Use the full URL to avoid CORS issues and incorrect port
-        const response = await axios.get('http://localhost:3000/api/paintings');
+        const response = await axios.get('http://localhost:3001/api/paintings');
         setPaintings(response.data);
+        console.log("Fetched paintings:", response.data);  // Log the fetched data
+
+        console.log("fetched paintings");
       } catch (error) {
         console.error('Error fetching paintings:', error);
       }
@@ -22,11 +25,12 @@ const MainComponent = () => {
     fetchPaintings();
   }, []);
   
+  
 
   // Update painting in MongoDB
   const updatePainting = async (updatedPainting) => {
     try {
-      await axios.put(`http://localhost:3000/api/paintings/${updatedPainting.PaintingID}`, updatedPainting);
+      await axios.put(`/api/paintings/${updatedPainting.PaintingID}`, updatedPainting);
       setPaintings((prevPaintings) =>
         prevPaintings.map((p) => (p.PaintingID === updatedPainting.PaintingID ? updatedPainting : p))
       );
