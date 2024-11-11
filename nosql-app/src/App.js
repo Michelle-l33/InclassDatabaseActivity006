@@ -1,13 +1,18 @@
 // src/App.js
 import React from 'react';
 import MainComponent from './components/MainComponent';
+import './index.css';
 
 function App() {
   return (
-    <div>
+    <>
+    <div id="Title">
       <h1>Painting Management</h1>
-      <MainComponent />
     </div>
+    <div className="Window">
+        <MainComponent />
+      </div>
+      </>
   );
 }
 
