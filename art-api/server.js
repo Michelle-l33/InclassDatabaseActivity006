@@ -16,9 +16,11 @@ mongoose.connect('mongodb://localhost:27017/artDB', {
   console.log('Connected to MongoDB');
   return seedData(); // Run seeding before starting the server
 })
+
 .catch((err) => {
   console.error('Error connecting to MongoDB or seeding:', err);
 });
+
 
 
 // Get all paintings

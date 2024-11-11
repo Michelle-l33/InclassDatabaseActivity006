@@ -3,12 +3,11 @@ const Painting = require('./models/Painting');
 const fs = require('fs');
 const path = require('path');
 
-
-// Your seed data logic
 const seedData = async () => {
     const paintings = JSON.parse(fs.readFileSync(path.join(__dirname, 'art.json'), 'utf-8'));
     try {
       for (const painting of paintings) {
+      
         const newPainting = new Painting(painting);
         await newPainting.save();
       }
