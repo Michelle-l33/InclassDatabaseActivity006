@@ -30,9 +30,11 @@ const MainComponent = () => {
   // Update painting in MongoDB
   const updatePainting = async (updatedPainting) => {
     try {
-      await axios.put(`/api/paintings/${updatedPainting.PaintingID}`, updatedPainting);
+      const paintingID = updatedPainting.PaintingID
+      await axios.put(`http://localhost:3001/api/paintings/${paintingID}`, updatedPainting);
+      console.log("starting to look for it");
       setPaintings((prevPaintings) =>
-        prevPaintings.map((p) => (p.PaintingID === updatedPainting.PaintingID ? updatedPainting : p))
+        prevPaintings.map((p) => (p.PaintingID === paintingID ? updatedPainting : p))
       );
       alert('Painting updated successfully!');
     } catch (error) {
@@ -42,7 +44,7 @@ const MainComponent = () => {
   };
 
   return (
-    <div style={{ display: 'flex' }}>
+    <div id="outer">
       <PaintingList paintings={paintings} onSelectPainting={setSelectedPainting} />
       <PaintingForm selectedPainting={selectedPainting} onUpdatePainting={updatePainting} />
     </div>
