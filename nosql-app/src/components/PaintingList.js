@@ -9,7 +9,9 @@ const PaintingList = ({ paintings, onSelectPainting }) => {
     <div id="smallWindow">
       {paintings.map((painting) => (
         <div id = "imageDiv" key={painting.PaintingID} onClick={() => onSelectPainting(painting)} style={{ cursor: 'pointer', padding: '10px' }}>
-          <img src={`${painting.MuseumLink}/${painting.ImageFileName}`} alt={painting.Title} />
+          <img src={`${painting.MuseumLink}/${painting.ImageFileName}`} alt={painting.Title} onError={(e)=>{
+            e.target.src = "../logo512.png"
+          }} />
           <button className="paintingtitle"><p >{painting.Title}</p></button>
         </div>
       ))}
