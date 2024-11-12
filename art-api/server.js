@@ -2,6 +2,8 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const Painting = require('./models/Painting');
+const seedData=require('./seed')
+
 
 const app = express();
 app.use(express.json());
